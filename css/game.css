@@ -1,0 +1,296 @@
+/* ============================================================
+   GAME.CSS — Catch the Bat Game
+   Colour scheme: White · Yellow · Blue (with arcade glow)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Lato:wght@400;700&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+
+:root {
+  --blue:        #1a3a8f;
+  --blue-mid:    #2251c5;
+  --blue-game:   #0d1f5c;
+  --yellow:      #f5c500;
+  --yellow-light:#fde87a;
+  --white:       #ffffff;
+  --off-white:   #f8f9ff;
+  --text-muted:  #7a8aaa;
+  --border:      rgba(26,58,143,0.2);
+  --glow-blue:   rgba(34,81,197,0.4);
+  --glow-yellow: rgba(245,197,0,0.35);
+}
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'Pixelify Sans', monospace;
+  background: var(--blue-game);
+  color: var(--white);
+  overflow: hidden;
+}
+
+/* Subtle grid lines for arcade feel */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34,81,197,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,81,197,0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* HEADER BANNER (hidden in game, just a tiny sliver) */
+.header { display: none; }
+
+/* NAVIGATION */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--blue);
+  box-shadow: 0 2px 20px rgba(26,58,143,0.5);
+}
+
+.topnav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  gap: 2px;
+}
+
+nav a {
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+  font-family: 'Pixelify Sans', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  color: var(--yellow);
+  background: rgba(255,255,255,0.1);
+}
+
+nav a[style*="float:right"] {
+  float: none !important;
+  margin-left: auto;
+  background: var(--yellow);
+  color: var(--blue);
+  font-weight: 700;
+  padding: 7px 20px;
+}
+
+nav a[style*="float:right"]:hover {
+  background: var(--yellow-light);
+  color: var(--blue);
+}
+
+/* GAME AREA */
+#gameArea {
+  position: fixed;
+  top: 56px;
+  left: 0; right: 0;
+  bottom: 42px;
+  overflow: hidden;
+  z-index: 1;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%,
+    rgba(34,81,197,0.2) 0%, transparent 70%);
+}
+
+/* BAT */
+#bat {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  font-size: 38px;
+  line-height: 56px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  z-index: 10;
+  filter: drop-shadow(0 0 8px var(--glow-yellow));
+  transition: filter 0.1s;
+}
+#bat::after { content: "🦇"; }
+#bat:hover { filter: drop-shadow(0 0 18px var(--glow-yellow)); }
+
+@keyframes batCaught {
+  0%   { transform: scale(1)   rotate(0deg); }
+  40%  { transform: scale(1.8) rotate(25deg); }
+  100% { transform: scale(1)   rotate(0deg); }
+}
+.bat-caught { animation: batCaught 0.3s ease !important; }
+
+/* HUD */
+#hud {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  z-index: 20;
+  background: var(--blue);
+  border: 2px solid var(--yellow);
+  padding: 10px 30px;
+  border-radius: 40px;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  box-shadow: 0 0 24px var(--glow-blue), 0 4px 16px rgba(0,0,0,0.3);
+}
+
+#hud div { color: var(--yellow); }
+
+/* SHARED PANEL */
+#startScreen,
+#gameOver {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: var(--blue);
+  border: 2px solid var(--yellow);
+  padding: 48px 56px;
+  border-radius: 18px;
+  box-shadow: 0 0 60px var(--glow-blue), 0 0 0 1px rgba(245,197,0,0.2);
+  z-index: 30;
+  min-width: 340px;
+  animation: fadeIn 0.4s ease;
+}
+
+#gameTitle {
+  font-family: 'Pixelify Sans', monospace;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--yellow);
+  text-shadow: 0 0 16px var(--glow-yellow);
+  line-height: 1.65;
+  margin-bottom: 26px;
+}
+
+#gameOver { border-color: var(--yellow); }
+
+#gameOverText {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--yellow);
+  text-shadow: 0 0 20px var(--glow-yellow);
+  margin-bottom: 4px;
+}
+
+#finalScore {
+  color: var(--white);
+  font-size: 1.25rem;
+}
+
+/* BUTTONS */
+#playBtn,
+#restartBtn {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 13px 40px;
+  font-family: 'Pixelify Sans', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  background: var(--yellow);
+  color: var(--blue);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 20px var(--glow-yellow);
+}
+
+#playBtn:hover,
+#restartBtn:hover {
+  background: var(--yellow-light);
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 28px var(--glow-yellow);
+}
+
+/* COUNTDOWN */
+#startCountdown {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Pixelify Sans', monospace;
+  font-size: 110px;
+  font-weight: 700;
+  color: var(--yellow);
+  text-shadow: 0 0 40px var(--glow-yellow), 0 0 80px rgba(245,197,0,0.2);
+  z-index: 25;
+  display: none;
+  animation: popUp 0.9s ease;
+  pointer-events: none;
+}
+
+@keyframes popUp {
+  0%   { transform: translate(-50%,-50%) scale(0.3); opacity:0; }
+  60%  { transform: translate(-50%,-50%) scale(1.15); opacity:1; }
+  100% { transform: translate(-50%,-50%) scale(1); opacity:1; }
+}
+
+/* CLICK RIPPLE */
+.cursor-circle {
+  position: fixed;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 2px solid var(--yellow);
+  pointer-events: none;
+  transform: translate(-50%,-50%);
+  animation: ripple 0.5s ease-out forwards;
+  z-index: 999;
+}
+
+@keyframes ripple {
+  0%   { transform: translate(-50%,-50%) scale(0.4); opacity: 1; }
+  100% { transform: translate(-50%,-50%) scale(2.2); opacity: 0; }
+}
+
+/* FOOTER */
+footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 1000;
+  text-align: center;
+  padding: 10px;
+  background: var(--blue);
+  border-top: 1px solid rgba(245,197,0,0.15);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.5);
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%,-48%) scale(0.96); }
+  to   { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+}
+
+@media (max-width: 600px) {
+  .topnav { flex-wrap: wrap; height: auto; padding: 8px 12px; gap: 4px; }
+  nav a { font-size: 0.7rem; padding: 5px 8px; }
+  #startScreen, #gameOver { padding: 32px 24px; min-width: 280px; }
+  #gameTitle { font-size: 1.2rem; }
+  #hud { font-size: 0.75rem; padding: 8px 16px; gap: 14px; }
+}

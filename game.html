@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Catch the Bat Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/game.css">
+</head>
+<body>
+<div class="header"></div>
+<nav>
+  <div class="topnav">
+    <a href="index.html">About LCBA</a>
+    <a href="ict.html">ICT</a>
+    <a href="image.html">Image Gallery</a>
+    <a href="video.html">Video Gallery</a>
+    <a href="game.html" style="float:right">Game</a>
+  </div>
+</nav>
+  <div id="gameArea">
+    <div id="bat"></div>
+    <div id="startCountdown"></div>
+
+    <!-- HUD -->
+    <div id="hud">
+      <div id="score">Score: 0</div>
+      <div id="timer">Time: 30s</div>
+      <div id="bestScore">Best Score: 0</div>
+    </div>
+
+    <!-- Intro Screen -->
+    <div id="startScreen">
+      <h1 id="gameTitle">Catch the Bat 🦇 <br> Created by: Inventiveness </h1>
+      <button id="playBtn">Play</button>
+    </div>
+
+    <!-- Game Over -->
+    <div id="gameOver" style="display:none;">
+      <span id="gameOverText">Game Over!</span><br> <br>
+      Final Score: <span id="finalScore"></span><br> <br>
+      <button id="restartBtn">Restart</button>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 TVL–ICT Strand | Senior High School Program
+  </footer>
+
+  
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+/* ============================================================
+   INDEX.CSS — About LCBA
+   Colour scheme: White · Yellow · Blue
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap');
+
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --blue:        #1a3a8f;
+  --blue-mid:    #2251c5;
+  --blue-light:  #3b6fd4;
+  --blue-pale:   #dce8ff;
+  --yellow:      #f5c500;
+  --yellow-light:#fde87a;
+  --yellow-pale: #fffbe6;
+  --white:       #ffffff;
+  --off-white:   #f8f9ff;
+  --text:        #1a2340;
+  --text-mid:    #3a4a70;
+  --text-muted:  #7a8aaa;
+  --border:      rgba(26,58,143,0.15);
+}
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--off-white);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER BANNER */
+.header {
+  height: 42vh;
+  min-height: 200px;
+  background-image: url("../assets/images/lcba bg.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg,
+    rgba(26,58,143,0.5) 0%,
+    rgba(26,58,143,0.15) 60%,
+    rgba(245,197,0,0.1) 100%);
+}
+
+/* NAVIGATION */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--blue);
+  box-shadow: 0 2px 16px rgba(26,58,143,0.3);
+}
+
+.topnav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  gap: 2px;
+}
+
+nav a {
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  color: var(--yellow);
+  background: rgba(255,255,255,0.1);
+}
+
+/* Game link — pushed right, yellow pill */
+nav a[style*="float:right"] {
+  float: none !important;
+  margin-left: auto;
+  background: var(--yellow);
+  color: var(--blue);
+  font-weight: 700;
+  padding: 8px 22px;
+  border-radius: 6px;
+}
+
+nav a[style*="float:right"]:hover {
+  background: var(--yellow-light);
+  color: var(--blue);
+}
+
+/* PAGE CONTENT */
+.row {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.box {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 36px 40px;
+  text-align: justify;
+  line-height: 1.85;
+  font-size: 1rem;
+  color: var(--text);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(26,58,143,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: slideUp 0.6s ease both;
+}
+
+.box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 5px; height: 100%;
+  background: linear-gradient(to bottom, var(--yellow), var(--blue-mid));
+  border-radius: 14px 0 0 14px;
+}
+
+.box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(26,58,143,0.13);
+}
+
+.box h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  color: var(--blue);
+  border-bottom: 2px solid var(--yellow);
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+}
+
+.box h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--blue-mid);
+  margin-top: 18px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.box b {
+  color: var(--blue);
+  font-size: 1.02rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.box1 { animation-delay: 0.05s; }
+.box2 { animation-delay: 0.12s; }
+.box3 { animation-delay: 0.19s; }
+.box4 { animation-delay: 0.26s; }
+.box5 { animation-delay: 0.33s; }
+.box6 { animation-delay: 0.40s; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 24px 20px;
+  background: var(--blue);
+  color: rgba(255,255,255,0.65);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(28px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .topnav { flex-wrap: wrap; height: auto; padding: 10px 14px; gap: 4px; }
+  nav a { font-size: 0.72rem; padding: 6px 10px; }
+  .box { padding: 24px 20px; }
+  .row { padding: 28px 14px 60px; }
+}

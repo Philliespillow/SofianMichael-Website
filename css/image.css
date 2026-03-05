@@ -1,0 +1,182 @@
+/* ============================================================
+   IMAGE.CSS — Image Gallery
+   Colour scheme: White · Yellow · Blue
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+
+:root {
+  --blue:        #1a3a8f;
+  --blue-mid:    #2251c5;
+  --yellow:      #f5c500;
+  --yellow-light:#fde87a;
+  --white:       #ffffff;
+  --off-white:   #f8f9ff;
+  --text:        #1a2340;
+  --text-muted:  #7a8aaa;
+  --border:      rgba(26,58,143,0.15);
+}
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--off-white);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER BANNER */
+.header {
+  height: 280px;
+  background-image: url("../assets/images/superlupet.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg,
+    rgba(26,58,143,0.5) 0%,
+    rgba(26,58,143,0.15) 60%,
+    rgba(245,197,0,0.1) 100%);
+}
+
+/* NAVIGATION */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--blue);
+  box-shadow: 0 2px 16px rgba(26,58,143,0.3);
+}
+
+.topnav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  gap: 2px;
+}
+
+nav a {
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  color: var(--yellow);
+  background: rgba(255,255,255,0.1);
+}
+
+nav a[style*="float:right"] {
+  float: none !important;
+  margin-left: auto;
+  background: var(--yellow);
+  color: var(--blue);
+  font-weight: 700;
+  padding: 8px 22px;
+}
+
+nav a[style*="float:right"]:hover {
+  background: var(--yellow-light);
+  color: var(--blue);
+}
+
+/* GALLERY */
+.gallery {
+  padding: 48px 36px 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* CARDS */
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 18px rgba(26,58,143,0.1);
+  cursor: pointer;
+  background: var(--white);
+  animation: fadeIn 0.6s ease both;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card:nth-child(1) { animation-delay: 0.04s; }
+.card:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3) { animation-delay: 0.16s; }
+.card:nth-child(4) { animation-delay: 0.22s; }
+.card:nth-child(5) { animation-delay: 0.28s; }
+.card:nth-child(6) { animation-delay: 0.34s; }
+.card:nth-child(7) { animation-delay: 0.40s; }
+.card:nth-child(8) { animation-delay: 0.46s; }
+
+.card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(26,58,143,0.7) 0%,
+    rgba(245,197,0,0.15) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover {
+  border-color: var(--yellow);
+  box-shadow: 0 12px 36px rgba(26,58,143,0.2), 0 0 0 2px var(--yellow);
+}
+
+.card:hover img { transform: scale(1.08); }
+.card:hover::after { opacity: 1; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 24px 20px;
+  background: var(--blue);
+  color: rgba(255,255,255,0.65);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+@media (max-width: 768px) {
+  .gallery { padding: 28px 16px 60px; gap: 16px; }
+  .topnav { flex-wrap: wrap; height: auto; padding: 10px 14px; gap: 4px; }
+  nav a { font-size: 0.72rem; padding: 6px 10px; }
+}
